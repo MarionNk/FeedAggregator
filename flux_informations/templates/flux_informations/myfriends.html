@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block body %}
+
+    <!-- <header class="major">
+        <h2>Ipsum sed dolor</h2>
+    </header> --> <br>
+    
+    <h3>HERE ARE YOUR FRIENDS &#128516;</h3>
+    <div class="posts">
+        {% for i,keys in friends.items %}
+                <article>
+                    <img src="{% static './images/defaultpp.png' %}" alt="Avatar" class="avatar">
+                    <h3  style="padding-top: 8px;padding-left: 20px;">{{ keys.pseudo }}</h3>
+                    <p>je n'aime pas parler de moi... mais quand je visite un site, j'avoue que si je vois une rubrique consacrée au webmaster, je clique sur le lien...</p>
+                    
+                    <a href="#" class="">{{ keys.email }}</a><br><br>
+                    <ul class="actions">
+                    <li><a href="{% url 'loading2' %}?requestdest={{ keys.pseudo }}" class="button small" id="etatamitie">Cancel friendship</a></li>
+                </article>
+        {% endfor %}
+        
+    </div>
+
+  {% endblock body %}
+
+  {% block myfeeds %}
+  <ul>
+      {% for i in mesflux %}
+          <li><a href="{% url 'userfeeds' %}?nomflux={{i}}">{{i}}</a></li>
+      {% endfor %}
+  </ul>										
+  {% endblock myfeeds %}

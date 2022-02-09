@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block body %}
+
+<!-- Section -->
+        {% block search %}
+
+        {% endblock search %}
+
+        <p style="margin-top: 5em;">loader</p>
+
+
+        <script>
+            function redirect() {
+                window.location.href="/searchFriends";
+            }
+            setTimeout(redirect,000);
+        </script>
+{% endblock body %}

@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block body %}
+<h2 style="margin-bottom: 0px;padding-top: 1em;float: left;">{{nomflux}}'s Feed</h2>
+<a href="{% url 'loading4' %}?annuler={{nomflux}}" class="button small" style="float: right;margin-top: 3em;"><i class="fas fa-bell"></i>&nbsp; &nbsp;Unsubscribe here</a></li> 
+<div class="posts" style="padding-top: 1em;">
+    {% for i,key in publications.items %}
+    <article>
+        <a href="#" class="image"><img src="{{ key.image }}" alt=""/></a>
+        <h3>{{ key.titre }}</h3>
+        <p>{{ key.descrip }}</p>
+        <p>{{ key.siteweb }} {{key.date}}</p>
+        <ul class="actions">
+            &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;<a href="{{key.lien}}" class="button small"><i class="fas fa-eye"></i>&nbsp;&nbsp;See News</a></li> &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
+
+            <a href="" class="button small"><i class="fas fa-share"></i>&nbsp; &nbsp;Share</a></li> 
+
+        </ul>
+    </article>
+    {% endfor %}
+</div>
+{% endblock body %}
+
+{% block myfeeds %}
+<ul>
+    {% for i in mesflux %}
+        <li><a href="{% url 'userfeeds' %}?nomflux={{i}}">{{i}}</a></li>
+    {% endfor %}
+</ul>										
+{% endblock myfeeds %}

@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block body %}
+
+        {% block search %}
+               <!-- Search --> <br>
+               <section id="search" class="alt" style="padding-top: 1.7em; padding-bottom: 0.7em;width:360px;float: right;">
+                <form method="post" action="feedByLink">
+                    {% csrf_token %}
+                    <input type="text" name="url" id="search" placeholder="Search by rss links" />
+                </form>
+            </section>
+        {% endblock search %}
+                <div class="posts">
+                    {% if feed %}
+                        {% for i in feed.entries %}
+                            <article>
+                                {% for j in i.links %}
+                                        <a href="#" class="image"><img src="{{ i.href }}" alt="" /></a>
+                                {% endfor %}    
+                                <h3>{{ i.title }}</h3>
+                                <p>{{ i.description|striptags }}</p>
+                                <p>{{i.published}}</p>
+                                <ul class="actions">
+                                    <a href="{{i.link}}" class="button small">See News</a></li> &nbsp;&nbsp;
+                                    <a href="" class="button small">Share</a></li>
+                                </ul>
+                            </article>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+{% endblock body %}
+{% block myfeeds %}
+<ul>
+    {% for i in mesflux %}
+        <li><a href="{% url 'userfeeds' %}?nomflux={{i}}">{{i}}</a></li>
+    {% endfor %}
+</ul>										
+{% endblock myfeeds %}

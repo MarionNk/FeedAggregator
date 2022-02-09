@@ -1,0 +1,162 @@
+{% load static %}
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Amazing Reader</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="{% static './assets/css/main.css' %}" />
+		<style type="text/css">
+			/* .translates-ltr{margin-top:-100px;}
+			.translates-ltr{margin-top:-100px;} */
+			.goog-te-banner-frame{display:none;} 
+			/* .goog-logo-link{
+				display:none !important;
+			}
+			.goog-te-gadget{
+				color: transparent !important;
+			}  */
+			.avatar {
+			vertical-align: middle;
+			width: 50px;
+			height: 50px;
+			border-radius: 50%;
+			float: left;
+			}
+		</style>
+		{% block link %}
+		{% endblock link %}
+	</head>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+
+							<!-- Header -->
+								<header id="header">
+									<a href="home" class="logo"><strong>AMAZING</strong> READER</a>
+									<ul class="icons">
+										<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
+										<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
+										<li><a href="#" class="icon brands fa-snapchat-ghost"><span class="label">Snapchat</span></a></li>
+										<li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
+										<li><a href="#" class="icon brands fa-medium-m"><span class="label">Medium</span></a></li>
+										
+									</ul>
+									
+								</header>
+
+							<!-- Banner -->
+								{% block body %}
+
+									{% block search %}
+									{% endblock search %}
+
+                                {% endblock body %}
+						</div>
+					</div>
+
+				<!-- Sidebar -->
+					<div id="sidebar" style="background:white;box-shadow: 0 14px 10px rgba(0,0,0,0.1), 0 5px 5px rgba(0,0,0,0.1);">
+						<div class="inner">
+
+
+							<!-- Menu -->
+								<nav id="menu">
+									<div id="google_translate_element"></div><br>
+									<header class="major">
+										<h2>Menu</h2>
+									</header>
+									<ul>
+										<li><a href="home"><i class="fas fa-rss"></i>&nbsp; &nbsp; Follow Feeds</a></li>
+										<li>
+											<span class="opener"><i class="fas fa-play"></i>&nbsp;&nbsp; &nbsp;FEEDS SUBSCRIBED</span>
+											{% block myfeeds %}
+											<ul>
+												{% for i in mesflux %}
+													<li><a href="{% url 'userfeeds' %}?nomflux={{i}}">{{i}}</a></li>
+												{% endfor %}
+											</ul>
+											{% endblock myfeeds %}
+											
+										</li>
+										<li><a href="personnalfeeds"><i class="fas fa-star"></i>&nbsp; &nbsp; MY PERSONNAL FEED</a></li>
+										<li><a href="sharedwith_me"><i class="fas fa-user-friends"></i>&nbsp; &nbsp; SHARED WITH ME</a></li>
+										
+										<li>
+											<span class="opener"><i class="fas fa-user-check"></i>&nbsp; &nbsp; FRIENDS</span>
+											<ul>
+												<li><a href="myfriends"> MY FRIENDS</a></li>
+												<li><a href="friendship_request">FRIENDSHIP REQUESTS</a></li>
+												<li><a href="searchFriends">SEARCH FRIENDS</a></li>
+											</ul>
+										</li>
+										
+										<li><a href="index.html"><i class="fas fa-sun"></i>&nbsp; &nbsp; DISPLAY SETTINGS</a></li>
+										<li><a href="generic.html"><i class="fas fa-question"></i>&nbsp; &nbsp; HELP</a></li>
+										<li><a href="elements.html"><i class="fas fa-cogs"></i> &nbsp; &nbsp; SETTINGS</a></li>
+										
+										<li><a href="/"><i class="fas fa-sign-out-alt"></i> &nbsp; &nbsp; LOG-OUT</a></li>
+									</ul>
+								</nav>
+
+							<!-- Section -->
+								<section>
+									<header class="major">
+										<h2>Get in touch</h2>
+									</header>
+									<ul class="contact">
+										<li class="icon solid fa-envelope"><a href="#">amazingreader@gmail.com</a></li>
+										<li class="icon solid fa-phone">+(237) 655-248-580</li>
+										<li class="icon solid fa-home">AKWA, DOUALA </li>
+									</ul>
+								</section>
+
+							<!-- Footer -->
+								<footer id="footer">
+									<p class="copyright">&copy; marion nkuekam All rights reserved.</p>
+								</footer>
+
+						</div>
+					</div>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="{% static './assets/js/jquery.min.js' %}"></script>
+			<script src="{% static './assets/js/browser.min.js' %}"></script>
+			<script src="{% static './assets/js/breakpoints.min.js' %}"></script>
+			<script src="{% static './assets/js/util.js' %}"></script>
+			<script src="{% static './assets/js/main.js' %}"></script>
+			<script>
+				const filtrePays = (element) => {
+					const country = element.value;
+					const csrf_token = document.querySelector('input[name=csrfmiddlewaretoken]').value
+					const endpoint = "/fluxparCategorie?csrfmiddlewaretoken="+csrf_token+"&Country="+country;
+
+					window.location.href=endpoint;
+				}
+				const change = ()=>{
+					window.location.href="/searchFriends";
+				}
+				
+			</script>
+			<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+			<script type="text/javascript">
+				function googleTranslateElementInit() {
+					new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
+				}
+			</script>
+			<!-- <script type="text/javascript" src="https://cdn.weglot.com/weglot.min.js"></script>
+			<script>
+				Weglot.initialize({
+					api_key: 'wg_714bb0ab6a68ca004115549cde17aaa59'
+				});
+			</script> -->
+
+	</body>
+</html>

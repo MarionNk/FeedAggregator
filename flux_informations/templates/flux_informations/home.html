@@ -1,0 +1,122 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block link %}
+    
+{% endblock link %}
+{% block body %}
+
+        {% block search %}
+               <section id="search" class="alt" style="padding-top: 1.7em; padding-bottom: 0.7em;width:360px;float: right;">
+                    <form method="post" action="feedByLink">
+                        {% csrf_token %}
+                        <input type="text" name="url" id="search" placeholder="Search by links" />
+                    </form>
+                </section>
+        {% endblock search %}<!-- &#128516; -->
+        <!-- <h2 style="margin-bottom: 0px;padding-top: 1em;">View Feeds Of Any Category Of Your Choice </h2> -->
+    <div class="features my-3">
+        <article>
+            <div >
+                <a href="#" class="image"><img src="{% static './images/pexels-tranmautritam-285814.jpg' %}" style="width: 16em;height: 11em; padding-right: 2em;"alt="" /></a>
+            </div>
+            <!-- <span class="icon solid fa-laptop-code"></span> -->
+            <div class="content">
+                <h3>Technology</h3>
+                <p>Follow the latest news all around the world concerning technology </p>
+                <a href="{% url 'fluxparCategorie' %}?category=Technology" class="button small"><i class="fas fa-eye"></i>&nbsp;&nbsp;View</a></li>
+                <!-- <a href="{% url 'home' %}?category=Technology" class="button small"><i class="fas fa-play"></i>&nbsp;&nbsp;Subscribe</a></li> -->
+                
+            </div>
+        </article>
+        <article>
+            <div >
+                <a href="#" class="image"><img src="{% static './images/health.jpg' %}" style="width: 16em;height: 11em; padding-right: 2em;"alt="" /></a>
+            </div>
+            <!-- <span class="icon solid fa-procedures"></span> -->
+            <div class="content">
+                <h3>Health</h3>
+                <p>Follow the latest news all around the world concerning Health care </p>
+                <a href="{% url 'fluxparCategorie' %}?category=Health" class="button small"><i class="fas fa-eye"></i>&nbsp;&nbsp;View</a></li>
+                <!-- <a href="{% url 'home' %}?category=Health" class="button small"><i class="fas fa-play"></i>&nbsp;&nbsp;Subscribe</a></li> -->
+                
+            </div>
+        </article>
+        <article>
+            <div >
+                <a href="#" class="image"><img src="{% static './images/entertainment.jpg' %}" style="width: 16em;height: 11em; padding-right: 2em;"alt="" /></a>
+            </div>
+            <!-- <span class="icon solid fa-smile-wink"></span> -->
+            <div class="content">
+                <h3>Entertainment</h3>
+                <p>Follow the latest news all around the world concerning Entertainment </p>
+                <a href="{% url 'fluxparCategorie' %}?category=Entertainment" class="button small"><i class="fas fa-eye"></i>&nbsp;&nbsp;View</a></li>
+                <!-- <a href="{% url 'home' %}?category=Entertainment" class="button small"><i class="fas fa-play"></i>&nbsp;&nbsp;Subscribe</a></li> -->
+                
+            </div>
+        </article>
+        <article>
+            <div >
+                <a href="#" class="image"><img src="{% static './images/sport.jpg' %}" style="width: 16em;height: 11em; padding-right: 2em;"alt="" /></a>
+            </div>
+            <!-- <span class="icon solid fa-running"></span> -->
+            <div class="content">
+                <h3>Sports</h3>
+                <p>Follow the latest news all around the world concerning Sports </p>
+                <a href="{% url 'fluxparCategorie' %}?category=Sports" class="button small"><i class="fas fa-eye"></i>&nbsp;&nbsp;View</a></li>
+                <!-- <a href="{% url 'home' %}?category=Sports" class="button small"><i class="fas fa-play"></i>&nbsp;&nbsp;Subscribe</a></li> -->
+                
+            </div>
+        </article>
+        <article>
+            <div >
+                <a href="#" class="image"><img src="{% static './images/science.jpg' %}" style="width: 16em;height: 11em; padding-right: 2em;"alt="" /></a>
+            </div>
+            <!-- <span class="icon solid fa-microscope"></span> -->
+            <div class="content">
+                <h3>Science</h3>
+                <p>Follow the latest news all around the world concerning Science </p>
+                <a href="{% url 'fluxparCategorie' %}?category=Science" class="button small"><i class="fas fa-eye"></i>&nbsp;&nbsp;View</a></li>
+                <!-- <a href="{% url 'home' %}?category=Science" class="button small"><i class="fas fa-play"></i>&nbsp;&nbsp;Subscribe</a></li> -->
+                
+            </div>
+        </article>
+        <article>
+            <div >
+                <a href="#" class="image"><img src="{% static './images/business.jpg' %}" style="width: 16em;height: 11em; padding-right: 2em;"alt="" /></a>
+            </div>
+            <!-- <span class="icon solid fa-file-invoice-dollar"></span> -->
+            <div class="content">
+                <h3>Business</h3>
+                <p>Follow the latest news all around the world concerning Business </p>
+                <a href="{% url 'fluxparCategorie' %}?category=Business" class="button small"><i class="fas fa-eye"></i>&nbsp;&nbsp;View</a></li>
+                <!-- <a href="{% url 'home' %}?category=Business" class="button small"><i class="fas fa-play"></i>&nbsp;&nbsp;Subscribe</a></li> -->
+                
+            </div>
+        </article>
+        <h2 style="margin-bottom: 50px;padding-top: 1em;">&nbsp;&nbsp;&nbsp;&nbsp;Subscribe and view feeds created by amazingreader users</h2>
+        
+            {% for i,key in ufeed.items %}
+                <article>
+                    <div> 
+                        <a href="#" class="image"><img src="{{ key.image }}" style="width: 16em;height: 11em; padding-right: 2em;"alt="" /></a>
+                    </div>
+                    <div class="content">
+                        <h3>{{key.nom}}</h3>
+                        <p>Follow the latest news all around the world provided by our fellow user {{ key.nom }}</p>
+                        <a href="{% url 'home' %}?feed={{key.idflux}}" class="button small"><i class="fas fa-play"></i>&nbsp;&nbsp;subscribe</a></li>
+                    </div>
+                </article>
+            {% endfor %}
+
+    </div>
+</section>
+
+{% endblock body %}
+
+{% block myfeeds %}
+<ul>
+    {% for i in mesflux %}
+        <li><a href="{% url 'userfeeds' %}?nomflux={{i}}">{{i}}</a></li>
+    {% endfor %}
+</ul>										
+{% endblock myfeeds %}

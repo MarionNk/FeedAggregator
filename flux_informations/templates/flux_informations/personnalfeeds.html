@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block body %}
+<br>
+<h2>PUBLICATIONS OF YOUR PERSONNAL FEED</h2>
+<p>Note that these are the publications you shared to all your friends</p>
+    <div class="posts">
+        {% for i,key in personnalfeeds.items %}
+            <article>
+                <a href="#" class="image"><img src="{{ key.image }}" alt="" /></a>
+                <h3>{{ key.titre }}</h3>
+                <p>{{ key.description|striptags }}</p>
+                <p>Published on {{ key.datepublie }} on {{ key.siteweb }} </p>
+                <ul class="actions">
+                    &nbsp;&nbsp; &nbsp;<a href="{{i.lien}}" class="button small">See News</a></li> &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
+                    <a href="" class="button small">Remove from feed</a></li>
+                </ul>
+            </article>
+        {% endfor %}
+    </div>
+{% endblock body %}
+
+{% block myfeeds %}
+<ul>
+    {% for i in mesflux %}
+        <li><a href="{% url 'userfeeds' %}?nomflux={{i}}">{{i}}</a></li>
+    {% endfor %}
+</ul>										
+{% endblock myfeeds %}

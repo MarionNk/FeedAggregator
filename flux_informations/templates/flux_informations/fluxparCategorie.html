@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block body %}
+
+<!-- Section -->
+        {% block search %}
+               <!-- Search -->
+              <form method="get" action="fluxparCategorie">
+                  {% csrf_token %}
+                  <br><label for="Country"><i class="fas fa-filter"></i>&nbsp;&nbsp;Filter by Countries</label>
+                  <select name="Country" id="Country" onchange="filtrePays(this)" style="width:360px;">
+                      <option value=""></option>
+                      <option value="ar" style="border-radius: 0.4em;">ARGENTINA (ar)</option>
+                      <option value="be">BELGIUM (be)</option>
+                      <option value="br">BRAZIL (br)</option>
+                      <option value="ca">CANADA (ca)</option>
+                      <option value="cm">CAMEROON (cm)</option>
+                      <option value="cu">CUBA (cu)</option>
+                      <option value="eg">EGYPTE (eg)</option>
+                      <option value="fr">FRANCE (fr)</option>
+                      <option value="ng">NIGERIA (ng)</option>
+                      <option value="ru">RUSSIA (ru)</option>
+                      <option value="za">SOUTH AFRICA (za)</option>
+                      <option value="kr">SOUTH KOREA (kr)</option>
+                      <option value="uk">UNITED KINGDOM (uk)</option>
+                      <option value="us">UNITED STATES (us)</option>
+                  </select> <br>
+              </form>
+        {% endblock search %}
+<div class="posts">
+    {% if Camer %}
+        {% for i in articles %}
+            <article>
+                <a href="#" class="image"><img src="{{ i.urlToImage }}" alt="" /></a>
+                <h3>{{ i.title }}</h3>
+                <h2>{{ i.subtitle }}</h2>
+                <p>{{ i.description|striptags }}</p>
+                <p>Author:{{i.author}} Published on:{{i.published}}</p>
+                <ul class="actions">
+                    &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;<a href="{{i.link}}" class="button small"><i class="fas fa-eye"></i>&nbsp;&nbsp;See News</a></li> &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
+
+                   <!--  <a href="{% url 'partagePublication' %}?Info={{category}}?{{i.link}}?{{i.published}}?{{i.title}}?{{ i.description|striptags }}?{{JournalDuCameroun}}?{{ i.urlToImage }}" class="button small"><i class="fas fa-share"></i>&nbsp; &nbsp;Share</a></li>  -->
+
+                </ul>
+            </article>
+        {% endfor %}
+    {%else%}
+        {% for i in articles %}
+            <article>
+                <a href="#" class="image"><img src="{{ i.urlToImage }}" alt="" /></a>
+                <h3>{{ i.title }}</h3>
+                <p>{{ i.description|striptags }}</p>
+                <p>{{ i.source.name }} {{i.publishedAt}}</p>
+                <ul class="actions">
+                    &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;<a href="{{i.url}}" class="button small"><i class="fas fa-eye"></i>&nbsp;&nbsp;See News</a></li> &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
+
+                    <a href="{% url 'partagePublication' %}?Info={{category}}?{{i.url}}?{{i.publishedAt}}?{{i.title}}?{{i.description}}?{{i.source.name}}?{{ i.urlToImage }}" class="button small"><i class="fas fa-share"></i>&nbsp; &nbsp;Share</a></li> 
+
+                </ul>
+            </article>
+        {% endfor %}
+    {% endif %}
+    
+    
+</div>
+{% endblock body %}
+{% block myfeeds %}
+<ul>
+    {% for i in mesflux %}
+        <li><a href="{% url 'userfeeds' %}?nomflux={{i}}">{{i}}</a></li>
+    {% endfor %}
+</ul>										
+{% endblock myfeeds %}
